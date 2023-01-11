@@ -443,7 +443,7 @@ static char *skipelem(char *path, char *name) {
   return path;
 }
 
-// Look up and return the inode for a path name.
+// Look up and return the inode for a path name. Returns NULL if not found
 // If parent != 0, return the inode for the parent and copy the final
 // path element into name, which must have room for DIRSIZ bytes.
 // Must be called inside a transaction since it calls iput().
@@ -487,11 +487,17 @@ notfound:
   return 0;
 }
 
+/*
+See namex
+*/
 struct inode *namei(char *path) {
   char name[DIRSIZ];
   return namex(path, 0, name);
 }
 
+/*
+See namex
+*/
 struct inode *nameiparent(char *path, char *name) {
   return namex(path, 1, name);
 }

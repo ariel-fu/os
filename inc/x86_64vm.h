@@ -2,7 +2,6 @@
 #include <mmu.h>
 
 void      seginit(void);
-void      kvmalloc(void);
 pml4e_t*  setupkvm(void);
 int       mappages(pml4e_t *, uint64_t, int, uint64_t, int, int);
 pte_t*		walkpml4(pml4e_t*, const void*, int);
