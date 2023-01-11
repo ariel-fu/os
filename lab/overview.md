@@ -141,13 +141,13 @@ Students can safely ignore these files.
 
 ### Initialization
 
-initcode.S -- The bootloader starts executing the kernel at start.
+`initcode.S` -- The bootloader starts executing the kernel at start.
 start must be at a fixed known location in memory. start in turn calls 
 the C function main.
 
-main.c -- initialization code
+`main.c` -- initialization code
 
-In main.c:main, the kernel needs to do several things as it starts up.
+In `main.c:main`, the kernel needs to do several things as it starts up.
 Note that the ordering very much matters -- for example, we need the ability
 to allocate memory before we can build the kernel page table, etc. 
 
@@ -188,7 +188,7 @@ in physical memory or its remapped kernel virtual address.
 indirection so that virtual memory actions can be architecture independent.
 
 - `x86_64vm.c` -- code for managing memory (called exclusively through `vspace.c`).
-`kvmalloc` allocates the page table the hardware uses to map kernel memory.
+`mem_init` allocate the page table the hardware uses to map kernel memory.
 Protection bits are set in the page table so that user code cannot access
 kernel memory, even though it is "mapped" into the user address space.
 
@@ -196,7 +196,7 @@ kernel memory, even though it is "mapped" into the user address space.
 
 We'll have more to say about vm.c later.
 
-`mp.c, lapic.c` -- code to set up multiprocessor execution.  At present xk
+`mp.c`, `lapic.c` -- code to set up multiprocessor execution.  At present xk
 only runs in single processor mode, and so you can safely ignore those 
 routines. (Note: we do allow time-slicing of kernel code, and so your 
 code should be written to work correctly on a multiprocessor.)
@@ -228,12 +228,12 @@ each processor when nothing else is running. It finds a runnable process
 and switches to it.  When the process blocks or finishes, it switches
 back to the scheduler, which then picks the next process to run.
 
-`spinlock, sleeplock, swtch.S` -- code to acquire and release locks, as well
+`spinlock`, `sleeplock`, `swtch.S` -- code to acquire and release locks, as well
 as to switch between processes.
 
 We'll have more to say about `proc.c` and these other files later.
 
-`trap.c, trapasm.S, vectors.S, syscall.c` -- code to handle interrupts, 
+`trap.c`, `trapasm.S`, `vectors.S`, `syscall.c` -- code to handle interrupts, 
 exceptions, and system calls.  Initially, we just need to set up
 the interrupt table -- the set of vectors for where the hardware
 should jump on different types of interrupts and system calls.
@@ -481,7 +481,7 @@ an abstract page table entry.
 ### File system
 
 For the most part, you can ignore the details of the file system
-until lab5. However, in lab1 we ask you to implement the system calls
+until lab4. However, in lab1 we ask you to implement the system calls
 relating to opening, closing, and reading files.  Since the file 
 system code is provided as part of the baseline, this primarily 
 means implementing the code to keep track of open file descriptors 

@@ -11,7 +11,8 @@ struct inode {
   int valid; // Flag for if node is valid
   struct sleeplock lock;
 
-  short type; // copy of disk inode
+  // copy of disk inode (see fs.h for details)
+  short type; 
   short devid;
   uint size;
   struct extent data;

@@ -45,7 +45,7 @@ void detect_memory(void) {
     mem = max(mem, (size_t)(e->addr + e->len));
   }
 
-  // Limit memory to 256MB.
+  // Limit memory to 2GB.
   mem = min(mem, mem_max);
   npages = mem / PGSIZE;
   cprintf("E820: physical memory %dMB\n", mem / 1024 / 1024);

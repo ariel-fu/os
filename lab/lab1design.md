@@ -51,6 +51,7 @@ will be the first element, a pointer into the global file table that is the stdi
   - Finds an open entry in the global open file table and allocates a new file_info struct
     for the process open file table spot to point to.
   - Will always open a device, and only open a file if permissions passed are `O_RDONLY`.
+    - Use the type field to check for a device. See `stat.h` for possible values.
   - Returns the index into the process open file table as the file descriptor, or -1 on failure.
 - `fileclose`:
   - Release the file from this process, will have to clean up if this is the last reference.
@@ -88,11 +89,13 @@ associated `file*` functions.
 #### fs.c
 We will need to use a number of functions in fs.c. These include:
 - `namei`: Used to find the inode with the inputted path. Increments
-    the reference count for the inode at the filesystem layer.
+    the reference count for the inode at the filesystem layer. Does not readi inode data from disk.
 - `concurrent_readi`: Performs a read operation on the given inode.
 - `concurrent_writei`: Performs a write operation on the given inode. 
 - `concurrent_stati`: Grabs the stat struct for the given inode.
 - `irelease`: Decrements the reference count for the inode.
+- `locki`: Locks an inode (not a recursive lock). Also, populates fields of the inode from disk.
+- `unlocki`: Unlocks an inode. `locki` and `unlocki` do not modify the reference count.
 
 ## Risk Analysis
 
