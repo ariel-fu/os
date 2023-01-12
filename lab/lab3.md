@@ -184,6 +184,8 @@ init: starting sh
 $
 ```
 
+At this point, you will execute your tests in the shell. In GDB, the `initcode` command will load the symbol table for `init`, not the currently running test code. To step through the test code, use, for example, `lab3test` to load symbols for `lab3test.c`. You can do something similar for lab 1 and 2 tests.
+
 ### Exercise
 Allow xk to boot into the shell. Try a set of commands like `cat`, `echo`, `grep`,
 `ls`, `wc` along with `|` (i.e. pipe) in the shell to see if it works properly.

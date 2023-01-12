@@ -39,6 +39,9 @@ but you may find it useful to add some code to the xk initialization that
 checks and warns the user if the disk is original or modified.
 
 ## Part A
+
+To load the symbol table for part A tests in GDB, use `lab4test_a`.
+
 ### Disk layout
 In xk's baseline implementation, all files are laid out on disk sequentially.
 Your first task is to change the disk layout to enable files to be extended
@@ -199,6 +202,9 @@ lab4test_a passed!
 ```
 
 ## Part B
+
+To load the symbol table for part B tests in GDB, use `lab4test_b`.
+
 ### Synchronization in inode layer
 Now we have a writable file system! Since xk supports multiprocessing, our
 writable file system should handle any of the concurrency issues as well. If you
@@ -244,6 +250,9 @@ lab4test_b passed!
 ```
 
 ## Part C
+
+To load the symbol table for part C tests in GDB, use `lab4test_c`.
+
 ### Crash-safe file system
 
 Now that xk can add and modify files, the file system is still vulnerable to

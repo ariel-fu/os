@@ -152,7 +152,7 @@ in the kernel mappings of the process’s address space. This arrangement exists
 
 When xk boots, `userinit` (in `kernel/proc.c`) sets up a page table that maps virtual
 addresses starting at 0xFFFFFFFF80000000 (called KERNBASE in `inc/mmu.h`) to physical addresses starting
-at 0x0 as shown below. `userinit` also setups device memory (take a look at `setupkvm` in `kernel/x86_64vm.c`). `userinit` then setups user part of virtual memory.
+at 0x0 as shown below. `userinit` also sets up device memory (take a look at `setupkvm` in `kernel/x86_64vm.c`). `userinit` then sets up user part of virtual memory.
 
 	+---------+
 	|  Kernel |
@@ -169,7 +169,7 @@ at 0x0 as shown below. `userinit` also setups device memory (take a look at `set
 
 The kernel must allocate and free physical memory at run-time for page tables, process user memory, kernel stacks, and pipe buffers. xk allocates and frees whole 4096-byte pages at a time. It keeps
 track of which pages are free by using a bitmap style available field in each core map entry. Each core map entry represents the state of a physical memory page, similar to a `vpage_info` for the vspace.
-Allocation consists of setting the `availiable` bit to 0 (in `kernel/kalloc.c`) flag in the core map; freeing consists of changing the `available` bit.
+Allocation consists of setting the `available` bit to 0 (in `kernel/kalloc.c`) flag in the core map; freeing consists of changing the `available` bit.
 
 There is a bootstrap problem: all of physical memory must be mapped in order for the allocator to initialize the free list, but creating a page table with those mappings involves allocating page-table pages. xk solves this problem by allocating the static core map when xk starts initialization (see `mem_init` in `kernel/main.c`).
 

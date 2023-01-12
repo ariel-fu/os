@@ -285,7 +285,6 @@ Inode is a layer below file, it is used by many file systems (including xk's) to
 ### Question #5
 What is the first line of c code executed in the kernel when there is an interrupt? To force an interrupt, perform a system call. Add a `sleep` call within `lab1test.c` and use gdb to trace through it with the `si` command.
 You can use the `initcode` and `kern` commands in gdb to switch between user and kernel mode respectively.
-You can also use the `lab1test` command in GDB to load the symbols for lab1 test program.
 
 ### Question #6
 How large (in bytes) is a trap frame?
