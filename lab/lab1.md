@@ -478,7 +478,7 @@ What did you like or dislike about this lab? Is there anything you wish you knew
 
 Please submit your answers to the questions listed above to Gradescope.
 
-To submit the code, compress the whole repo in a zip file and submit to Gradescope.
+To submit the code, compress the whole repo in a zip file and submit to Gradescope. The easiest way to do this is to download from GitLab (there is a download button next to the clone button on the code/homepage for a repo). If you do zip the file yourself, make sure you run `make clean` first; the autograder fails if the upload is too large, which typically happens when you include the build outputs.
 (Note: to help the autograder find your code, do not put the repo in a subfolder. That is, the top-level of the zip file should contain the Makefile, the `kernel/` folder and all other files/folders of the repo)
 
 Just in case we have problem with Gradescope, please store a copy of your writeup in a file `lab1.txt` in the top-level xk directory and create a `end_lab1` git tag.
