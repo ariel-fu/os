@@ -97,6 +97,10 @@ We will need to use a number of functions in fs.c. These include:
 - `locki`: Locks an inode (not a recursive lock). Also, populates fields of the inode from disk.
 - `unlocki`: Unlocks an inode. `locki` and `unlocki` do not modify the reference count.
 
+
+#### proc.c
+We will need to use `myproc` to get the `struct proc*` (PCB) of the current process.
+
 ## Risk Analysis
 
 ### Unanswered Questions
