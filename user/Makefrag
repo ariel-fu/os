@@ -37,7 +37,7 @@ XK_UPROGS_OBJS := $(addsuffix .o,$(XK_UPROGS))
 XK_UPROGS_ASMS := $(addsuffix .asm,$(XK_UPROGS))
 
 $(O)/user/_%: $(O)/user/%.o $(ULIB)
-	$(LD) $(LDFLAGS) -N -e preface -Ttext 0 -o $@ $^
+	$(LD) $(LDFLAGS) -e preface -Ttext 1000 -o $@ $^
 	$(OBJDUMP) -S $@ > $@.asm
 
 $(O)/user/%.txt:
