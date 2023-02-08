@@ -13,7 +13,6 @@ enum {
 
 #define VPI_PRESENT  ((short) 1)
 #define VPI_WRITABLE ((short) 1)
-#define VPI_READONLY ((short) 0)
 
 struct vpage_info {
   short used;     // whether the page is in use
