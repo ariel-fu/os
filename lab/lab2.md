@@ -247,6 +247,10 @@ in any order, but each operation completes as an atomic unit. This means that
 if writer A tries to write `aaa` and writer B tries to write `bbb` concurrently,
 a reader can read `aaabbb` or `bbbaaa`, but not interleaved like `abbbaab`.
 
+> Note: xk differs from POSIX semantics by disallowing partial writes. This
+> change was made for pedagogical reasons to ensure students learns how to use
+> monitors.
+
 Since pipes support concurrency, your pipe implementation will
 need to use spinlocks and condition variables.  Note that with
 `dup` you may also have multiple readers and writers on the same pipe.
