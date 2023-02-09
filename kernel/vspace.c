@@ -168,7 +168,7 @@ vspaceinitcode(struct vspace *vs, char *init, uint64_t size)
   vs->regions[VR_CODE].va_base = 0;
   vs->regions[VR_CODE].size = PGROUNDUP(size);
   assertm(
-    vradddata(&vs->regions[VR_CODE], 0, init, size, VPI_PRESENT, VPI_WRITABLE) == 0,
+    vradddata(&vs->regions[VR_CODE], 0, init, size, VPI_PRESENT, VPI_READONLY) == 0,
     "failed to allocate init code data"
   );
 
@@ -194,8 +194,7 @@ vspaceloadcode(struct vspace *vs, char *path, uint64_t *rip)
 {
   struct inode *ip;
   struct proghdr ph;
-  int off, sz;
-  uint64_t va;
+  int off, sz, vr_size;
   struct elfhdr elf;
   int i;
 
@@ -212,10 +211,9 @@ vspaceloadcode(struct vspace *vs, char *path, uint64_t *rip)
     goto elf_failure;
 
   // Set start bound
-  vs->regions[VR_CODE].va_base = 0;
+  vs->regions[VR_CODE].va_base = PGSIZE;
 
   // Load program into memory.
-  va = 0;
   for(i=0, off=elf.phoff; i<elf.phnum; i++, off+=sizeof(ph)){
     if(readi(ip, (char*)&ph, off, sizeof(ph)) != sizeof(ph))
       goto elf_failure;
@@ -226,21 +224,22 @@ vspaceloadcode(struct vspace *vs, char *path, uint64_t *rip)
     if(ph.vaddr + ph.memsz < ph.vaddr)
       goto elf_failure;
 
-    if((sz = vregionaddmap(&vs->regions[VR_CODE], (uint64_t)va, ph.vaddr + ph.memsz, VPI_PRESENT, VPI_WRITABLE)) < 0)
+    // use readelf --sections --program-headers -W <executable> to view the ELF headers and the permissions
+    if((sz = vregionaddmap(&vs->regions[VR_CODE], (uint64_t)ph.vaddr, ph.memsz, VPI_PRESENT, (ph.flags & ELF_PROG_FLAG_WRITE) ? VPI_WRITABLE : VPI_READONLY)) < 0)
      goto elf_failure;
     if(ph.vaddr % PGSIZE != 0)
       goto elf_failure;
 
-    va += sz;
+    vr_size = ph.vaddr + ph.memsz;
 
     if(vrloaddata(&vs->regions[VR_CODE], ph.vaddr, ip, ph.off, ph.filesz) < 0)
      goto elf_failure;
   }
 
   // Set end bound;
-  vs->regions[VR_CODE].size = PGROUNDUP(sz);
+  vs->regions[VR_CODE].size = PGROUNDUP(vr_size);
   // The heap will be right after the code
-  vs->regions[VR_HEAP].va_base = PGROUNDUP(sz);
+  vs->regions[VR_HEAP].va_base = PGROUNDUP(vr_size + PGSIZE);
   vs->regions[VR_HEAP].size = 0;
 
   unlocki(ip);
