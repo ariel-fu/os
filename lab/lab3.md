@@ -367,3 +367,86 @@ your answers to the questions listed above.
 
 When you're finished, create an `end_lab3` git tag as described above,
 so we know the point at which you submitted your code.
+
+### lab3test expected output
+lab3test output should be close to the following: 
+```
+memtest
+mem ok
+memtest passed
+sbrktest
+pids 4-43 (6-45 if ran after sh) should be killed with trap 14 err 5
+pid 6 : trap 14 err 5 on cpu 0 rip 0x497 addr 0x80000000--kill proc
+pid 7 : trap 14 err 5 on cpu 0 rip 0x497 addr 0x8000c350--kill proc
+pid 8 : trap 14 err 5 on cpu 0 rip 0x497 addr 0x800186a0--kill proc
+pid 9 : trap 14 err 5 on cpu 0 rip 0x497 addr 0x800249f0--kill proc
+pid 10 : trap 14 err 5 on cpu 0 rip 0x497 addr 0x80030d40--kill proc
+pid 11 : trap 14 err 5 on cpu 0 rip 0x497 addr 0x8003d090--kill proc
+pid 12 : trap 14 err 5 on cpu 0 rip 0x497 addr 0x800493e0--kill proc
+pid 13 : trap 14 err 5 on cpu 0 rip 0x497 addr 0x80055730--kill proc
+pid 14 : trap 14 err 5 on cpu 0 rip 0x497 addr 0x80061a80--kill proc
+pid 15 : trap 14 err 5 on cpu 0 rip 0x497 addr 0x8006ddd0--kill proc
+pid 16 : trap 14 err 5 on cpu 0 rip 0x497 addr 0x8007a120--kill proc
+pid 17 : trap 14 err 5 on cpu 0 rip 0x497 addr 0x80086470--kill proc
+pid 18 : trap 14 err 5 on cpu 0 rip 0x497 addr 0x800927c0--kill proc
+pid 19 : trap 14 err 5 on cpu 0 rip 0x497 addr 0x8009eb10--kill proc
+pid 20 : trap 14 err 5 on cpu 0 rip 0x497 addr 0x800aae60--kill proc
+pid 21 : trap 14 err 5 on cpu 0 rip 0x497 addr 0x800b71b0--kill proc
+pid 22 : trap 14 err 5 on cpu 0 rip 0x497 addr 0x800c3500--kill proc
+pid 23 : trap 14 err 5 on cpu 0 rip 0x497 addr 0x800cf850--kill proc
+pid 24 : trap 14 err 5 on cpu 0 rip 0x497 addr 0x800dbba0--kill proc
+pid 25 : trap 14 err 5 on cpu 0 rip 0x497 addr 0x800e7ef0--kill proc
+pid 26 : trap 14 err 5 on cpu 0 rip 0x497 addr 0x800f4240--kill proc
+pid 27 : trap 14 err 5 on cpu 0 rip 0x497 addr 0x80100590--kill proc
+pid 28 : trap 14 err 5 on cpu 0 rip 0x497 addr 0x8010c8e0--kill proc
+pid 29 : trap 14 err 5 on cpu 0 rip 0x497 addr 0x80118c30--kill proc
+pid 30 : trap 14 err 5 on cpu 0 rip 0x497 addr 0x80124f80--kill proc
+pid 31 : trap 14 err 5 on cpu 0 rip 0x497 addr 0x801312d0--kill proc
+pid 32 : trap 14 err 5 on cpu 0 rip 0x497 addr 0x8013d620--kill proc
+pid 33 : trap 14 err 5 on cpu 0 rip 0x497 addr 0x80149970--kill proc
+pid 34 : trap 14 err 5 on cpu 0 rip 0x497 addr 0x80155cc0--kill proc
+pid 35 : trap 14 err 5 on cpu 0 rip 0x497 addr 0x80162010--kill proc
+pid 36 : trap 14 err 5 on cpu 0 rip 0x497 addr 0x8016e360--kill proc
+pid 37 : trap 14 err 5 on cpu 0 rip 0x497 addr 0x8017a6b0--kill proc
+pid 38 : trap 14 err 5 on cpu 0 rip 0x497 addr 0x80186a00--kill proc
+pid 39 : trap 14 err 5 on cpu 0 rip 0x497 addr 0x80192d50--kill proc
+pid 40 : trap 14 err 5 on cpu 0 rip 0x497 addr 0x8019f0a0--kill proc
+pid 41 : trap 14 err 5 on cpu 0 rip 0x497 addr 0x801ab3f0--kill proc
+pid 42 : trap 14 err 5 on cpu 0 rip 0x497 addr 0x801b7740--kill proc
+pid 43 : trap 14 err 5 on cpu 0 rip 0x497 addr 0x801c3a90--kill proc
+pid 44 : trap 14 err 5 on cpu 0 rip 0x497 addr 0x801cfde0--kill proc
+pid 45 : trap 14 err 5 on cpu 0 rip 0x497 addr 0x801dc130--kill proc
+free pages after out-of-memory(shouldn't be 0): 230
+Good job! sbrk decrement implemented!
+sbrk decrement test passed!
+sbrktest passed
+growstacktest
+pages_in_use before stack allocation = 147
+pages_in_swap before stack allocation = 0
+successfully added another page
+successfully added another page
+successfully added another page
+successfully added another page
+successfully added another page
+successfully added another page
+successfully added another page
+successfully added another page
+pages_in_use after stack allocation = 155
+pages_in_swap after stack allocation = 0
+growstacktest passed
+growstacktest_edgecase
+next 2 processes should be killed with trap 14 err 6
+pid 47 : trap 14 err 6 on cpu 0 rip 0xaf4 addr 0x7fff5000--kill proc
+pid 48 : trap 14 err 6 on cpu 0 rip 0xbc1 addr 0x80000000--kill proc
+growstacktest_edgecase passed
+copyonwriteforktest
+pages_in_use before copy-on-write fork = 355
+pages_in_swap before copy-on-write fork = 0
+pages_in_use after copy-on-write fork = 394
+pages_in_swap after copy-on-write fork = 0
+pages_in_use after read = 394
+pages_in_swap after read = 0
+pages_in_use after write = 594
+pages_in_swap after write = 0
+copyonwriteforktest passed
+lab3 tests passed!!
