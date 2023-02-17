@@ -24,7 +24,7 @@ To do this, look at `kernel/Makefrag`, you will find this section:
 $(O)/initcode : kernel/initcode.S user/lab2test.c $(ULIB)
 	$(CC) -nostdinc -I inc -c kernel/initcode.S -o $(O)/initcode.o
 	$(CC) -ffreestanding -MD -MP -mno-sse -I inc -c user/lab2test.c -o $(O)/lab2test.o
-	$(LD) $(LDFLAGS) -N -e start -Ttext 0 -o $(O)/initcode.out $(O)/initcode.o $(O)/lab2test.o $(ULIB)
+	$(LD) $(LDFLAGS) -N -e start -Ttext 1000 -o $(O)/initcode.out $(O)/initcode.o $(O)/lab2test.o $(ULIB)
 	$(OBJCOPY) -S -O binary $(O)/initcode.out $(O)/initcode
 	$(OBJDUMP) -S $(O)/initcode.out > $(O)/initcode.asm
 ```
@@ -33,7 +33,7 @@ Remove the dependency of `user/lab2test.c` in the initcode make rule by replacin
 ```
 $(O)/initcode : kernel/initcode.S
 	$(CC) -nostdinc -I inc -c kernel/initcode.S -o $(O)/initcode.o
-	$(LD) $(LDFLAGS) -N -e start -Ttext 0 -o $(O)/initcode.out $(O)/initcode.o
+	$(LD) $(LDFLAGS) -N -e start -Ttext 1000 -o $(O)/initcode.out $(O)/initcode.o
 	$(OBJCOPY) -S -O binary $(O)/initcode.out $(O)/initcode
 	$(OBJDUMP) -S $(O)/initcode.o > $(O)/initcode.asm
 ```
