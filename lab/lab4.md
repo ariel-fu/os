@@ -144,6 +144,8 @@ link to the new file, and (depending on your disk layout) change bitmap on
 disk. The inode file length itself will change, so don't forget to update this
 as well.
 
+You should truncate file names that are too long.
+
 ### Delete files
 Finally, you will need to support deleting files from the root directory
 with the `unlink` system call. If no processes have a reference to the 

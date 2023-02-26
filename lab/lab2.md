@@ -358,6 +358,8 @@ It might be helpful to take a look at how `userinit` sets up the trapframe.
 ### Exercise
 Implement `exec`.
 
+Hint: You shouldn't call `vspacecopy` in `exec`.
+
 #### What to Implement
 ```c
 /*
