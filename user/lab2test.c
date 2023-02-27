@@ -61,8 +61,6 @@ int main() {
 
     printf(1, "lab2 tests passed!!\n");
 
-    while (1)
-      ;
   }
 
   while ((wpid = wait()) >= 0 && wpid != pid)
@@ -310,15 +308,15 @@ void fdesctest(void) {
   close(fd1);
 
   // Make sure the correct file descriptor ints are maintained
-  
+
   int fd2, fd3, fd4, fd5;
   assert((fd2 = open("l2_share.txt", O_RDONLY)) > -1);
   assert((fd3 = open("l2_share.txt", O_RDONLY)) > -1);
   assert((fd4 = open("l2_share.txt", O_RDONLY)) > -1);
   assert((fd5 = open("l2_share.txt", O_RDONLY)) > -1);
 
-  assert(close(fd3) != -1);
-  assert(close(fd4) != -1);
+  assert(close(4) != -1);
+  assert(close(5) != -1);
 
   if (!fork()) {
     assert(read(fd2, buf, 10) == 10);
@@ -374,6 +372,7 @@ void childpidtest() {
 }
 
 void exectest(void) {
+
   printf(1, "exectest\n");
   // exectest arg checking
   int pid = fork();

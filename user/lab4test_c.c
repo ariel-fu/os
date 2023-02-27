@@ -115,6 +115,6 @@ int main(int argc, char *argv[]) {
   create_file(steps);
   check_after_file_creation();
   printf(stdout, "lab4test_c passed!\n");
-  exit();
+  return 0;
 }
 

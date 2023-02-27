@@ -163,7 +163,7 @@ void sbrktest(void) {
       }
       sbrk(10);
       char *newbrk = sbrk(0);
-      if (sbrk(-100) != newbrk) {
+      if (sbrk(-(int)newbrk - 100) != newbrk) {
         error("sbrk decrement more than allocated should do nothing\n");
       }
       sbrk(-10);
@@ -193,6 +193,7 @@ void growstacktest() {
   for (i = 0; i < 8; i++) {
     buf[i * 4096] = 'a';
     buf[i * 4096 - 1] = buf[i * 4096];
+    printf(1, "successfully added another page\n");
   }
   sysinfo(&info2);
 
@@ -300,7 +301,7 @@ void copyonwriteforktest() {
     if (info4.pages_in_use - info3.pages_in_use + info4.pages_in_swap -
             info3.pages_in_swap <
         100)
-      error("too less memory is used for write");
+      error("too little memory is used for write");
 
     wait();
   }

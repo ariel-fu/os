@@ -357,5 +357,5 @@ int main(int argc, char *argv[]) {
   fourfiles();
   simpledelete();
   printf(stdout, "lab4test_a passed!\n");
-  exit();
+  return 0;
 }
