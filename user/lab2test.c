@@ -315,8 +315,8 @@ void fdesctest(void) {
   assert((fd4 = open("l2_share.txt", O_RDONLY)) > -1);
   assert((fd5 = open("l2_share.txt", O_RDONLY)) > -1);
 
-  assert(close(4) != -1);
-  assert(close(5) != -1);
+  assert(close(fd3) != -1);
+  assert(close(fd4) != -1);
 
   if (!fork()) {
     assert(read(fd2, buf, 10) == 10);
