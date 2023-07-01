@@ -41,8 +41,10 @@ int main() {
   // dup(0);     // stdout
   // dup(0);     // stderr
 
-  printf(stdout, "hello world\n");
+  printf(stdout, "not hello world\n");
+  sleep(10);
 
+  printf(stdout, "this is done");
   while (1);
 
   testopen();

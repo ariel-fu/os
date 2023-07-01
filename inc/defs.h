@@ -58,6 +58,14 @@ noreturn void panic(char *);
 // exec.c
 int exec(char *, char **);
 
+// file.c
+int fileopen(char* filepath, int mode);
+int fileread(int fd, char* buffer, int readbytes);
+int filewrite(int fd, char* buffer, int writebytes);
+int fileclose(int fd);
+int filedup(int fd);
+int filestat(int fd, struct stat*);
+
 // fs.c
 void readsb(int dev, struct superblock *sb);
 struct inode *dirlookup(struct inode *, char *, uint *);

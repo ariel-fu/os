@@ -78,16 +78,17 @@ enum procstate { UNUSED, EMBRYO, SLEEPING, RUNNABLE, RUNNING, ZOMBIE };
 
 // Per-process state
 struct proc {
-  struct vspace vspace;        // Virtual address space descriptor
-  char* kstack;                // Kernel stack
-  enum procstate state;        // Process state
-  int pid;                     // Process ID
-  struct proc *parent;         // Parent process
-  struct trap_frame *tf;       // Trap frame for current syscall
-  struct context *context;     // swtch() here to run process
-  void *chan;                  // If non-zero, sleeping on chan
-  int killed;                  // If non-zero, have been killed
-  char name[16];               // Process name (debugging)
+  struct vspace vspace;             // Virtual address space descriptor
+  char* kstack;                     // Kernel stack
+  enum procstate state;             // Process state
+  int pid;                          // Process ID
+  struct proc *parent;              // Parent process
+  struct trap_frame *tf;            // Trap frame for current syscall
+  struct context *context;          // swtch() here to run process
+  void *chan;                       // If non-zero, sleeping on chan
+  int killed;                       // If non-zero, have been killed
+  char name[16];                    // Process name (debugging)
+  struct file_info filedescriptors[NOFILE]; // Process open file table
 };
 
 // Process memory is laid out contiguously, low addresses first:

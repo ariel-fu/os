@@ -30,3 +30,11 @@ extern struct devsw devsw[];
 enum {
   CONSOLE = 1,
 };
+
+// structure representing a logical file
+struct file_info {
+  uint memRefCount; // in memory reference count
+  struct inode * node; // a reference to the inode
+  int currOffset;  // current offset
+  int flags; // access permissions
+};
