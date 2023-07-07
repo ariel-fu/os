@@ -88,7 +88,7 @@ struct proc {
   void *chan;                       // If non-zero, sleeping on chan
   int killed;                       // If non-zero, have been killed
   char name[16];                    // Process name (debugging)
-  struct file_info filedescriptors[NOFILE]; // Process open file table
+  struct file_info* filetable[NOFILE]; // Process open file table
 };
 
 // Process memory is laid out contiguously, low addresses first:

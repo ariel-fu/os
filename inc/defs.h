@@ -64,7 +64,7 @@ int fileread(int fd, char* buffer, int readbytes);
 int filewrite(int fd, char* buffer, int writebytes);
 int fileclose(int fd);
 int filedup(int fd);
-int filestat(int fd, struct stat*);
+int filestat(int fd, struct stat* fstat);
 
 // fs.c
 void readsb(int dev, struct superblock *sb);
