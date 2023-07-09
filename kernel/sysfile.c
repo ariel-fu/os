@@ -41,8 +41,27 @@ int sys_dup(void) {
 
 int sys_read(void) {
   // LAB1
+  int fd;
+  char *buf;
+  int n;
 
-  return -1;
+  int result = argint(0, &fd);
+  if(result < 0) {
+    return -1;
+  }
+  result = argstr(1, &buf);
+  if(result < 0) {
+    return -1;
+  }
+
+  result = argint(2, &n);
+  if(result < 0) {
+    // invalid filepath
+    return -1;
+  }
+
+  int readRes = fileread(fd, buf, n);
+  return readRes;
 }
 
 int sys_write(void) {
