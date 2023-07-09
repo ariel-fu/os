@@ -78,12 +78,30 @@ int sys_write(void) {
 
 int sys_close(void) {
   // LAB1
-  return -1;
+  int fd;
+  int res = argint(0, &fd);
+  if(res < 0) {
+    return -1;
+  }
+
+  res = fileclose(fd);
+  return res;
 }
 
 int sys_fstat(void) {
   // LAB1
-  return -1;
+  int fd;
+  struct stat *fstat;
+
+  if(argint(0, fd) < 0) {
+    return -1;
+  }
+
+  if(argptr(1, (char**)&fstat, sizeof(fstat)) < 0) {
+    return -1;
+  }
+
+  return filestat(fd, fstat);
 }
 
 int sys_open(void) {

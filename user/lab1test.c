@@ -48,10 +48,10 @@ int main() {
   // while (1);
 
   testopen();
+  testinvalidargs();
+  smallfilereadtest();
+  nofilestest();
   duptest();
-  // testinvalidargs();
-  // smallfilereadtest();  
-  // nofilestest();
 
   printf(stdout, "lab1 tests passed!\n");
   return 0;
