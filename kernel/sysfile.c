@@ -75,17 +75,21 @@ int sys_write(void) {
   if(result < 0) {
     return -1;
   }
+  
+  cprintf("got fd\n");
 
   result = argstr(1, &buf);
   if(result < 0) {
     return -1;
   }
+  cprintf("got buff\n");
 
   result = argint(2, n);
   if(result < 0 || n < 0) {
     return -1;
   }
-
+  
+  cprintf("got writebytes\n");
   int writeRes = filewrite(fd, buf, n);
 
   return writeRes;
