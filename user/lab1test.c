@@ -235,7 +235,7 @@ void duptest(void) {
 
   char* buf2;
   if (read(fd2, buf2, 10) != 10)
-    error("coudn't read from the dupped fd");
+    error("coudn't read from the dupped fd %s", buf2);
   buf2[10] = 0;
 
   if (strcmp(buf2, "aaaaaaaaaa") == 0)
