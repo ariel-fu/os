@@ -82,7 +82,7 @@ int filewrite(int fd, char* buffer, int writebytes) {
 
     cprintf("check file node & flags");
     struct file_info file = *(currProc->filetable[fd]);
-    if(file.node == NULL || file.flags == O_RDONLY) {
+    if(file == null || file.node == NULL || file.flags == O_RDONLY) {
         return -1;
     }
 
