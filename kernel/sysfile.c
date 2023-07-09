@@ -309,7 +309,7 @@ int sys_pipe(void) {
 //   return -1;
 // }
 
-// int sys_unlink(void) {
-//   // LAB 4
-//   return -1;
-// }
+int sys_unlink(void) {
+  // LAB 4
+  return -1;
+}
