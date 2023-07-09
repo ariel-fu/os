@@ -141,7 +141,7 @@ int fileread(int fd, char *buffer, int readbytes) {
   int numRead = concurrent_readi(file.node, buffer, file.currOffset, readbytes);
   cprintf("read: %d\n", numRead);
   if (numRead > 0) {
-    file.currOffset += numRead;
+    (currProc->filetable[fd])->currOffset += numRead;
   }
 
   cprintf("updated offset to: %d\n", (currProc->filetable[fd])->currOffset);
