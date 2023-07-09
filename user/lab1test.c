@@ -44,13 +44,13 @@ int main() {
   printf(stdout, "not hello world\n");
   sleep(10);
 
-  printf(stdout, "this is done");
-  while (1);
+  printf(stdout, "testing now");
+  // while (1);
 
   testopen();
-  testinvalidargs();
-  smallfilereadtest();
   duptest();
+  testinvalidargs();
+  smallfilereadtest();  
   nofilestest();
 
   printf(stdout, "lab1 tests passed!\n");

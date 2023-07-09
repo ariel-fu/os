@@ -41,7 +41,7 @@ int sys_dup(void) {
 
 int sys_read(void) {
   // LAB1
-  
+
   return -1;
 }
 
@@ -81,7 +81,7 @@ int sys_open(void) {
     return -1;
   }
 
-  result = argstr(0, filepath);
+  result = argstr(0, &filepath);
   if(result == -1) {
     // invalid filepath
     return -1;

@@ -9,9 +9,11 @@
 #include <fs.h>
 #include <param.h>
 #include <proc.h>
-#include <stat.h>
 #include <sleeplock.h>
 #include <spinlock.h>
+#include <stat.h>
+#include <stdlib.h>
+
 
 struct devsw devsw[NDEV];
 
@@ -143,8 +145,8 @@ int filedup(int fd) {
         return -1;
     }
 
-    int slot = 0;
-    for(slot; slot < NOFILE; slot++) {
+    int slot;
+    for(slot = 0; slot < NOFILE; slot++) {
         if(currProc->filetable[slot] == NULL) {
             // found the first available slot
             currProc->filetable[slot] = currProc->filetable[fd];
