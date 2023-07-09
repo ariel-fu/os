@@ -70,27 +70,23 @@ int sys_write(void) {
   char *buf;
   int n;
 
-  if (argint(0, &fd) < 0 || argint(2, &n) < 0 || argptr(1, &buf, n) < 0 ||
-      argstr(1, &buf) < 0) {
+  int result = argint(0, &fd);
+  if(result < 0) {
     return -1;
   }
-  // int result = argint(0, &fd);
-  // if(result < 0) {
-  //   return -1;
-  // }
 
-  // cprintf("got fd\n");
+  cprintf("got fd\n");
 
-  // result = argstr(1, &buf);
-  // if(result < 0) {
-  //   return -1;
-  // }
-  // cprintf("got buff\n");
+  result = argstr(1, &buf);
+  if(result < 0) {
+    return -1;
+  }
+  cprintf("got buff\n");
 
-  // result = argint(2, &n);
-  // if(result < 0 || n < 0) {
-  //   return -1;
-  // }
+  result = argint(2, &n);
+  if(result < 0 || n < 0) {
+    return -1;
+  }
 
   // cprintf("got writebytes\n");
   int writeRes = filewrite(fd, buf, n);
@@ -131,7 +127,7 @@ int sys_open(void) {
   char *filepath;
   int mode;
   int result = argint(1, &mode);
-  if (result == -1) {
+  if (result < 0 || mode < 0 || mode > NOFILE) {
     // invalid FD
     return -1;
   }

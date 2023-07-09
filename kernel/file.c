@@ -62,11 +62,11 @@ int fileopen(char* filepath, int mode) {
             gfiledescriptors[globalFD].flags = mode;
             // set processor to point to global file table
             currProc->filetable[processFD] = &gfiledescriptors[globalFD];
-            break;
+          return processFD;
         }
     }
 
-    return processFD;
+    return -1;
 }
 
 int filewrite(int fd, char* buffer, int writebytes) {
