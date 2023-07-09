@@ -75,7 +75,7 @@ int sys_write(void) {
     return -1;
   }
 
-  result = argstr(1, buf);
+  result = argstr(1, &buf);
   if(result < 0) {
     return -1;
   }
