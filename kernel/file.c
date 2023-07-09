@@ -14,6 +14,8 @@
 #include <fcntl.h>
 #include <fs.h>
 
+#include <stdio.h>
+
 
 struct devsw devsw[NDEV];
 
