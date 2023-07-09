@@ -165,8 +165,8 @@ int filewrite(int fd, char *buf, int bytes_written) {
 
   if (f.node == NULL)
     return -1;
-  if (f.flags == O_RDONLY)
-    return -1;
+  // if (f.flags == O_RDONLY)
+  //   return -1;
 
   return concurrent_writei(f.node, buf, f.currOffset, bytes_written);
 }
