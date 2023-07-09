@@ -85,7 +85,6 @@ int fileopen(char *filepath, int mode) {
       gfiledescriptors[globalFD] = file;
       // set processor to point to global file table
       currProc->filetable[processFD] = &gfiledescriptors[globalFD];
-      unlocki(newiNode);
       return processFD;
     }
   }
