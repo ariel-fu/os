@@ -66,6 +66,7 @@ int sys_read(void) {
 }
 
 int sys_write(void) {
+  cprintf("cal; write\n");
   int fd;
   char* buf;
   int n;
