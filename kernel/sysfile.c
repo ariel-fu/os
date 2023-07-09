@@ -16,24 +16,23 @@
 #include <spinlock.h>
 #include <stat.h>
 
-
 int sys_dup(void) {
   // LAB1
   int fd;
   int result = argint(0, &fd);
-  if(result == -1) {
+  if (result == -1) {
     // failure
     return -1;
   }
 
-  if(fd > NOFILE || fd < 0) {
+  if (fd > NOFILE || fd < 0) {
     // invalid FD
     return -1;
   }
 
   int dupFD = filedup(fd);
 
-  if(dupFD == -1) {
+  if (dupFD == -1) {
     return -1;
   }
 
@@ -47,16 +46,16 @@ int sys_read(void) {
   int n;
 
   int result = argint(0, &fd);
-  if(result < 0) {
+  if (result < 0) {
     return -1;
   }
   result = argstr(1, &buf);
-  if(result < 0) {
+  if (result < 0) {
     return -1;
   }
 
   result = argint(2, &n);
-  if(result < 0 || n < 0) {
+  if (result < 0 || n < 0) {
     // invalid filepath
     return -1;
   }
@@ -68,18 +67,18 @@ int sys_read(void) {
 int sys_write(void) {
   cprintf("call write\n");
   int fd;
-  char* buf;
+  char *buf;
   int n;
 
-  if(argint(0,&fd)<0||argfd(0,&fd)<0|| argint(2, &n) < 0|| 
-     argptr(1, &buf, n) < 0||  argstr(1,&buf)<0) {
-      return -1;
-     }
+  if (argint(0, &fd) < 0 || argint(2, &n) < 0 || argptr(1, &buf, n) < 0 ||
+      argstr(1, &buf) < 0) {
+    return -1;
+  }
   // int result = argint(0, &fd);
   // if(result < 0) {
   //   return -1;
   // }
-  
+
   // cprintf("got fd\n");
 
   // result = argstr(1, &buf);
@@ -92,7 +91,7 @@ int sys_write(void) {
   // if(result < 0 || n < 0) {
   //   return -1;
   // }
-  
+
   cprintf("got writebytes\n");
   int writeRes = filewrite(fd, buf, n);
   cprintf("got the results %d\n", writeRes);
@@ -103,7 +102,7 @@ int sys_close(void) {
   // LAB1
   int fd;
   int res = argint(0, &fd);
-  if(res < 0) {
+  if (res < 0) {
     return -1;
   }
 
@@ -116,11 +115,11 @@ int sys_fstat(void) {
   int fd;
   struct stat *fstat;
 
-  if(argint(0, fd) < 0) {
+  if (argint(0, fd) < 0) {
     return -1;
   }
 
-  if(argptr(1, (char**)&fstat, sizeof(fstat)) < 0) {
+  if (argptr(1, (char **)&fstat, sizeof(fstat)) < 0) {
     return -1;
   }
 
@@ -132,23 +131,23 @@ int sys_open(void) {
   char *filepath;
   int mode;
   int result = argint(1, &mode);
-  if(result == -1) {
+  if (result == -1) {
     // invalid FD
     return -1;
   }
 
-   if (mode == O_CREATE) {
+  if (mode == O_CREATE) {
     return -1;
   }
 
   result = argstr(0, &filepath);
-  if(result < 0) {
+  if (result < 0) {
     // invalid filepath
     return -1;
   }
 
   int open_res = fileopen(filepath, mode);
-  if(open_res == -1) {
+  if (open_res == -1) {
     return -1;
   }
   return open_res;
