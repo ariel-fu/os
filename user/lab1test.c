@@ -227,7 +227,6 @@ void duptest(void) {
     error("returned fd from dup was not the smallest free fd, was '%d'", fd2);
 
   // test offsets are respected in dupped files
-  int test = read(fd1, buf, 10);
   int i;
   if(i = read(fd1, buf, 10) != 10) {
     error("not equal: " + i);
