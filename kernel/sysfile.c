@@ -66,7 +66,7 @@ int sys_read(void) {
 }
 
 int sys_write(void) {
-  cprintf("cal; write\n");
+  cprintf("call write\n");
   int fd;
   char* buf;
   int n;
@@ -82,7 +82,7 @@ int sys_write(void) {
   }
 
   result = argint(2, n);
-  if(result < 0) {
+  if(result < 0 || n < 0) {
     return -1;
   }
 

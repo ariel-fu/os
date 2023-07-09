@@ -69,26 +69,31 @@ int fileopen(char* filepath, int mode) {
 }
 
 int filewrite(int fd, char* buffer, int writebytes) {
+    cprintf("in write");
     struct proc* currProc = myproc();
     if(currProc == NULL) {
         return -1;
     }
 
+    cprintf("check fd");
     if(currProc->filetable[fd] == NULL) {
         return -1;
     }
+
+    cprintf("check file node & flags");
     struct file_info file = *(currProc->filetable[fd]);
     if(file.node == NULL || file.flags == O_RDONLY) {
         return -1;
     }
 
+    cprintf("concurrent write");
     //write bytes_to_write from the buffer into the fd
     int bytesWritten = concurrent_writei(file.node, buffer, file.currOffset, writebytes);
     //update the current position
     if(bytesWritten != -1){
         file.currOffset = file.currOffset + bytesWritten;
     }
-
+    cprintf("done");
     return bytesWritten;
 }
 
