@@ -75,17 +75,17 @@ int fileopen(char *filepath, int mode) {
 
   // place into global file descriptor
   for (int globalFD = 0; globalFD < NFILE; globalFD++) {
-    if (gfiledescriptors[globalFD].ref == 0) {
-      gfiledescriptors[globalFD].ref++;
-      gfiledescriptors[globalFD].node = newiNode;
-      gfiledescriptors[globalFD].flags = mode;
+    cprintf("at: %d with file %d\n", globalFD, gfiledescriptors[globalFD].ref);
+    if (gfiledescriptors[globalFD].ref == 0 ) {
+      struct file_info file;
+      file.ref = 1;
+      file.node = newiNode;
+      file.currOffset = 0;
+      file.flags = mode;
+      gfiledescriptors[globalFD] = file;
       // set processor to point to global file table
       currProc->filetable[processFD] = &gfiledescriptors[globalFD];
       unlocki(newiNode);
-
-  cprintf("lock\n");
-
-
       return processFD;
     }
   }

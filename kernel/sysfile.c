@@ -149,6 +149,12 @@ int sys_open(void) {
     return -1;
   }
 
+  result = argptr(0, &filepath, strlen(filepath));
+  if (result < 0) {
+    // invalid filepath
+    return -1;
+  }
+
   int open_res = fileopen(filepath, mode);
   if (open_res == -1) {
     return -1;
