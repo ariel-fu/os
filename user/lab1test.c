@@ -236,8 +236,9 @@ void duptest(void) {
     error("not equal: " + i);
   }
   // assert(read(fd1, buf, 10) == 10);
+  
   buf[10] = 0;
-
+  printf(stdout, "buf: %s", buf);
   if (strcmp(buf, "aaaaaaaaaa") != 0)
     error("couldn't read from original fd after dup");
 
