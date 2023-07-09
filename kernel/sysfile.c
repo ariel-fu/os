@@ -56,7 +56,7 @@ int sys_read(void) {
   }
 
   result = argint(2, &n);
-  if(result < 0) {
+  if(result < 0 || n < 0) {
     // invalid filepath
     return -1;
   }
