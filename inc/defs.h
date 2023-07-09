@@ -198,6 +198,7 @@ int fetchint(uint64_t, int *);
 int fetchint64_t(uint64_t, int64_t *);
 int fetchstr(uint64_t, char **);
 void syscall(void);
+int argfd(int, int*);
 
 // trap.c
 void idtinit(void);

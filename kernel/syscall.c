@@ -188,3 +188,12 @@ int sys_sysinfo(void) {
 
   return 0;
 }
+
+// Check if file descripter is valid or not
+int argfd(int n, int*fd_ptr){
+   if(*fd_ptr<0 || *fd_ptr>=NOFILE){// the file at that pass is not open or offbound
+      cprintf("fd %d",*fd_ptr);
+      return -1;
+   }
+   return 1; // not sure what value should return here
+}
