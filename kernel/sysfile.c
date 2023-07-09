@@ -18,18 +18,36 @@
 
 int sys_dup(void) {
   // LAB1
-  return -1;
+  int fd;
+  int result = argint(0, &fd);
+  if(result == -1) {
+    // failure
+    return -1;
+  }
+
+  if(fd > NOFILE || fd < 0) {
+    // invalid FD
+    return -1;
+  }
+
+  int dupFD = filedup(fd);
+
+  if(dupFD == -1) {
+    return -1;
+  }
+
+  return dupFD;
 }
 
 int sys_read(void) {
   // LAB1
+  
   return -1;
 }
 
 int sys_write(void) {
   // you have to change the code in this function.
   // Currently it supports printing one character to the screen.
-
   int n;
   char *p;
 
@@ -51,7 +69,29 @@ int sys_fstat(void) {
 
 int sys_open(void) {
   // LAB1
-  return -1;
+  char *filepath;
+  int mode;
+  int result = argint(1, &mode);
+  if(result == -1) {
+    // invalid FD
+    return -1;
+  }
+
+  if(mode != O_RDONLY) {
+    return -1;
+  }
+
+  result = argstr(0, filepath);
+  if(result == -1) {
+    // invalid filepath
+    return -1;
+  }
+
+  int open_res = fileopen(filepath, mode);
+  if(open_res == -1) {
+    return -1;
+  }
+  return open_res;
 }
 
 int sys_exec(void) {
