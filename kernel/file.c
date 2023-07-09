@@ -32,6 +32,12 @@ int fileopen(char* filepath, int mode) {
         return -1;
     }
 
+    int type = newiNode->type;
+    if(type == T_FILE && mode != O_RDONLY) {
+        cprintf("a non-console file & non-read mode");
+        return -1;
+    }
+
     int availableSlot = 0;
     int processFD;
     for(processFD = 0; processFD < NOFILE; processFD++) {
@@ -76,7 +82,14 @@ int filewrite(int fd, char* buffer, int writebytes) {
         return -1;
     }
 
-    return concurrent_writei(file.node, buffer, file.currOffset, writebytes);
+    //write bytes_to_write from the buffer into the fd
+    int bytesWritten = concurrent_writei(file.node, buffer, file.currOffset, writebytes);
+    //update the current position
+    if(bytesWritten != -1){
+        file.currOffset = file.currOffset + bytesWritten;
+    }
+
+    return bytesWritten;
 }
 
 int fileread(int fd, char* buffer, int readbytes) {
@@ -95,9 +108,9 @@ int fileread(int fd, char* buffer, int readbytes) {
     }
 
     int numRead = concurrent_readi(file.node, buffer, file.currOffset, readbytes);
-    
-    file.currOffset += numRead;
-
+    if(numRead != -1) {
+        file.currOffset += numRead;
+    }
     return numRead;
 }
 

@@ -16,6 +16,7 @@
 #include <spinlock.h>
 #include <stat.h>
 
+
 int sys_dup(void) {
   // LAB1
   int fd;
@@ -114,7 +115,7 @@ int sys_open(void) {
     return -1;
   }
 
-   if (mode == O_WRONLY || mode == O_RDWR || mode == O_CREATE) {
+   if (mode == O_CREATE) {
     return -1;
   }
 
