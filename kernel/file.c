@@ -134,6 +134,7 @@ int fileclose(int fd) {
 }
 
 int filedup(int fd) {
+    printf("inside filedup with fd %d\n", fd);
     struct proc* currProc = myproc();
     if(currProc == NULL) {
         return -1;
@@ -147,10 +148,11 @@ int filedup(int fd) {
     if(file.node == NULL) {
         return -1;
     }
-
+    printf("create fileinfo\n");
     int slot;
     for(slot = 0; slot < NOFILE; slot++) {
         if(currProc->filetable[slot] == NULL) {
+            printf("found slot\n");
             // found the first available slot
             currProc->filetable[slot] = currProc->filetable[fd];
             currProc->filetable[fd]->memRefCount++;
