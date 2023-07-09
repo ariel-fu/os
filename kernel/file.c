@@ -20,6 +20,7 @@ struct file_info gfiledescriptors[NFILE];
 int smallestFd;
 
 int fileopen(char* filepath, int mode) {
+    cprintf("MODE: %d\n", mode);
     struct inode* newiNode = namei(filepath);
     if(newiNode == NULL) {
         return -1;
@@ -70,6 +71,7 @@ int fileopen(char* filepath, int mode) {
 
 int filewrite(int fd, char* buffer, int writebytes) {
     struct proc* currProc = myproc();
+
     if(currProc == NULL) {
         return -1;
     }
@@ -93,9 +95,9 @@ int filewrite(int fd, char* buffer, int writebytes) {
     //write bytes_to_write from the buffer into the fd
     int bytesWritten = concurrent_writei(file.node, buffer, file.currOffset, writebytes);
     //update the current position
-    if(bytesWritten != -1){
-        file.currOffset = file.currOffset + bytesWritten;
-    }
+    // if(bytesWritten != -1){
+    //     file.currOffset = file.currOffset + bytesWritten;
+    // }
     cprintf("done %d\n", bytesWritten);
     return bytesWritten;
 }
