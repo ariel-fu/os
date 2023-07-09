@@ -25,8 +25,8 @@ int fileopen(char *filepath, int mode) {
     return -1;
   }
 
-  cprintf("lock\n");
-  locki(newiNode);
+  cprintf("lock \n");
+  // locki(newiNode);
 
   if (newiNode->type == T_DIR) {
     cprintf("dir\n");
