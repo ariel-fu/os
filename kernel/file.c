@@ -5,14 +5,14 @@
 #include <cdefs.h>
 #include <defs.h>
 #include <file.h>
-#include <fcntl.h>
 #include <fs.h>
 #include <param.h>
-#include <proc.h>
 #include <sleeplock.h>
 #include <spinlock.h>
 #include <stat.h>
-#include <user.h>
+#include <proc.h>
+#include <fcntl.h>
+#include <fs.h>
 
 
 struct devsw devsw[NDEV];
@@ -22,7 +22,7 @@ int smallestFd;
 
 int fileopen(char* filepath, int mode) {
     struct inode* newiNode = namei(filepath);
-    struct stat* st = (struct stat*)malloc(sizeof(struct stat));
+    struct stat* st;
     concurrent_stati(newiNode, st);
 
     struct proc* currProc = myproc();
