@@ -238,7 +238,7 @@ void duptest(void) {
   buf[10] = 0;
 
   if (strcmp(buf, "aaaaaaaaaa") == 0)
-    error("the duped fd didn't respect the read offset from the other file.");
+    error("the duped fd didn't respect the read offset from the other file. %s", buf);
 
   if (strcmp(buf, "bbbbbbbbbb") != 0)
     error(
