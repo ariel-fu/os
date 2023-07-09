@@ -14,7 +14,7 @@
 #include <stat.h>
 
 struct devsw devsw[NDEV];
-struct file_info ftable[NFILE];
+struct file_info gftable[NFILE];
 int currOffset = 0;
 
 int fileopen(char *path, int mode) {
@@ -70,26 +70,26 @@ failure.
 
   int gfd = 0; // global file descriptor index
   for (gfd = 0; gfd < NFILE; gfd++) {
-    if (ftable[gfd].ref == 0) { // check if slot is empty
+    if (gftable[gfd].ref == 0) { // check if slot is empty
 
-      // Update ftable[gfd] file_info struct value
-      ftable[gfd].ref += 1;
-      ftable[gfd].node = node;
+      // Update gftable[gfd] file_info struct value
+      gftable[gfd].ref += 1;
+      gftable[gfd].node = node;
 
       if (node == 0)
         cprintf("why you are zero pointer");
-      // ftable[gfd].currOffset =0;//should it be zero?
-      ftable[gfd].flags = mode; // TODO Not sure what value should be assign
+      // gftable[gfd].currOffset =0;//should it be zero?
+      gftable[gfd].flags = mode; // TODO Not sure what value should be assign
                                 // here
 
       // Assign pointer to filetable in slot pfd
-      p->filetable[pfd] = &ftable[gfd];
+      p->filetable[pfd] = &gftable[gfd];
       break;
     }
   }
 
-  //  cprintf("%s open in ftable %d and point to global ftable %d with ref %d:
-  //  \n",path,pfd,gfd,ftable[gfd].ref);
+  //  cprintf("%s open in gftable %d and point to global gftable %d with ref %d:
+  //  \n",path,pfd,gfd,gftable[gfd].ref);
   return pfd;
 }
 
@@ -145,7 +145,7 @@ int fileread(int fd, char *buf, int bytes_read) {
     return -1;
   if (f.flags == O_WRONLY)
     return -1;
-  // TODO need to change currOffset to ftable's struct in order to avoid multi
+  // TODO need to change currOffset to gftable's struct in order to avoid multi
   // tread issue
   currOffset = concurrent_readi(f.node, buf, f.currOffset, bytes_read);
 
