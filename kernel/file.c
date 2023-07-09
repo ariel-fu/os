@@ -25,17 +25,23 @@ int fileopen(char *filepath, int mode) {
     return -1;
   }
 
+  cprintf("lock\n");
   locki(newiNode);
 
   if (newiNode->type == T_DIR) {
+    cprintf("dir\n");
+
     unlocki(newiNode);
     return -1;
   }
 
   struct stat st;
   concurrent_stati(newiNode, &st);
+  cprintf("stati\n");
 
   struct proc *currProc = myproc();
+  cprintf("proc\n");
+
   if (currProc == NULL) {
     return -1;
   }
@@ -55,11 +61,17 @@ int fileopen(char *filepath, int mode) {
       break;
     }
   }
+  cprintf("process slot\n");
 
   if (availableSlot == 0) {
     // no more valid places for a new file
+  cprintf("not available slot\n");
+
     return -1;
   }
+
+  cprintf("global slot\n");
+
 
   // place into global file descriptor
   for (int globalFD = 0; globalFD < NFILE; globalFD++) {
@@ -70,6 +82,10 @@ int fileopen(char *filepath, int mode) {
       // set processor to point to global file table
       currProc->filetable[processFD] = &gfiledescriptors[globalFD];
       unlocki(newiNode);
+
+  cprintf("lock\n");
+
+
       return processFD;
     }
   }
