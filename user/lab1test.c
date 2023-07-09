@@ -223,7 +223,11 @@ void duptest(void) {
 
   // test offsets are respected in dupped files
   int test = read(fd1, buf, 10);
-  printf("read(fd1, buf, 10): %d\n", test);
+  printf("read(fd1, buf, 10)\n");
+  int i;
+  if(i = read(fd1, buf, 10) != 10) {
+    error("not equal: " + i);
+  }
   assert(read(fd1, buf, 10) == 10);
   buf[10] = 0;
 
