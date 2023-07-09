@@ -114,6 +114,7 @@ void testinvalidargs(void) {
   printf(stdout, "passed argument checking for read\n");
 
   // write
+  printf(stdout, "_____________WRITE_____________");
   if (write(15, buf, 11) != -1)
     error("write on a non existent file descriptor");
 
