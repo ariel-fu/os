@@ -48,7 +48,7 @@ int main() {
   // while (1);
 
   testopen();
-  // duptest();
+  duptest();
   // testinvalidargs();
   // smallfilereadtest();  
   // nofilestest();
@@ -59,17 +59,13 @@ int main() {
 
 void testopen(void) {
   int fd, fd2;
-  printf(stdout, "testing a\n");
   // test invalid open arguments.
   if (open("/other.txt", O_CREATE) != -1)
     error("created file in read only file system");
-printf(stdout, "testing b\n");
   if (open("/small.txt", O_RDWR) != -1 || open("/small.txt", O_WRONLY) != -1)
     error("tried to open a file for writing in read only fs");
-printf(stdout, "testing c\n");
   if (open("/other.txt", O_RDONLY) != -1)
     error("opened a file that doesn't exist");
-printf(stdout, "testing d\n");
   fd = open("/small.txt", O_RDONLY);
   if (fd == -1)
     error("cannot open small.txt");
