@@ -76,7 +76,6 @@ int sys_write(void) {
   // uartputc((int)(*p));
   // return 1;
 
-  cprintf("call write\n");
   int fd;
   char *buf;
   int n;
@@ -86,13 +85,10 @@ int sys_write(void) {
     return -1;
   }
 
-  cprintf("got fd\n");
-
   result = argstr(1, &buf);
   if(result < 0) {
     return -1;
   }
-  cprintf("got buff\n");
 
   result = argint(2, &n);
   if(result < 0 || n < 0) {
