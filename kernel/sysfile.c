@@ -84,7 +84,7 @@ int sys_write(void) {
   }
   cprintf("got buff\n");
 
-  result = argint(2, n);
+  result = argint(2, &n);
   if(result < 0 || n < 0) {
     return -1;
   }
