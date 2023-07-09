@@ -24,8 +24,8 @@ int fileopen(char* filepath, int mode) {
     if(newiNode == NULL) {
         return -1;
     }
-    struct stat* st;
-    concurrent_stati(newiNode, st);
+    struct stat st;
+    concurrent_stati(newiNode, &st);
     
     struct proc* currProc = myproc();
     if(currProc == NULL) {
