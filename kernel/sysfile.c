@@ -65,7 +65,17 @@ int sys_read(void) {
 }
 
 int sys_write(void) {
-  return 0;
+  // you have to change the code in this function.
+  // Currently it supports printing one character to the screen.
+
+  int n;
+  char *p;
+
+  if (argint(2, &n) < 0 || argptr(1, &p, n) < 0)
+    return -1;
+  uartputc((int)(*p));
+  return 1;
+
   // cprintf("call write\n");
   // int fd;
   // char *buf;
