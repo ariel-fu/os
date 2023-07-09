@@ -227,28 +227,18 @@ void duptest(void) {
     error("returned fd from dup was not the smallest free fd, was '%d'", fd2);
 
   // test offsets are respected in dupped files
-  int i;
-  if(i = read(fd1, buf, 10) != 10) {
-    error("not equal: " + i);
-  }
-
-  if(i = read(fd1, buf, 10) != 10) {
-    error("not equal: " + i);
-  }
-  // assert(read(fd1, buf, 10) == 10);
-  
+  assert(read(fd1, buf, 10) == 10);
   buf[10] = 0;
-  printf(stdout, "buf: %s", buf);
+
   if (strcmp(buf, "aaaaaaaaaa") != 0)
     error("couldn't read from original fd after dup");
 
-  char* buf2;
-  if (read(fd2, buf2, 10) != 10)
-    error("coudn't read from the dupped fd %s", buf2);
-  buf2[10] = 0;
+  if (read(fd2, buf, 10) != 10)
+    error("coudn't read from the dupped fd");
+  buf[10] = 0;
 
-  if (strcmp(buf2, "aaaaaaaaaa") == 0)
-    error("the duped fd didn't respect the read offset from the other file. %s", buf2);
+  if (strcmp(buf, "aaaaaaaaaa") == 0)
+    error("the duped fd didn't respect the read offset from the other file.");
 
   if (strcmp(buf, "bbbbbbbbbb") != 0)
     error(
@@ -318,3 +308,4 @@ void nofilestest() {
 
   printf(stdout, "nofiles test ok\n");
 }
+
