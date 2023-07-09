@@ -154,11 +154,11 @@ int filedup(int fd) {
             // found the first available slot
             currProc->filetable[slot] = currProc->filetable[fd];
             currProc->filetable[fd]->memRefCount++;
-            break;
+            return slot;
         }
     }
 
-    return slot;
+    return -1;
 }
 
 int filestat(int fd, struct stat* fstat) {
