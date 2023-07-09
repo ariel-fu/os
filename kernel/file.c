@@ -12,7 +12,7 @@
 #include <sleeplock.h>
 #include <spinlock.h>
 #include <stat.h>
-#include <stdlib.h>
+#include <user.h>
 
 
 struct devsw devsw[NDEV];
