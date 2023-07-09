@@ -46,11 +46,15 @@ int main() {
 
   printf(stdout, "testing now\n");
   // while (1);
-
+  cprintf("at testing open\n");
   testopen();
+  cprintf("at testing invalid args\n");
   testinvalidargs();
+  cprintf("at testing file read\n");
   smallfilereadtest();
+  cprintf("at testing no files\n");
   nofilestest();
+  cprintf("at testing dup\n");
   duptest();
 
   printf(stdout, "lab1 tests passed!\n");
