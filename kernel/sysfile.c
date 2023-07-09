@@ -68,37 +68,37 @@ int sys_write(void) {
   // you have to change the code in this function.
   // Currently it supports printing one character to the screen.
 
-  // int n;
-  // char *p;
-
-  // if (argint(2, &n) < 0 || argptr(1, &p, n) < 0)
-  //   return -1;
-  // uartputc((int)(*p));
-  // return 1;
-
-  int fd;
-  char *buf;
   int n;
+  char *p;
 
-  int result = argint(0, &fd);
-  if(result < 0) {
+  if (argint(2, &n) < 0 || argptr(1, &p, n) < 0)
     return -1;
-  }
+  uartputc((int)(*p));
+  return 1;
 
-  result = argstr(1, &buf);
-  if(result < 0) {
-    return -1;
-  }
+  // int fd;
+  // char *buf;
+  // int n;
 
-  result = argint(2, &n);
-  if(result < 0 || n < 0) {
-    return -1;
-  }
+  // int result = argint(0, &fd);
+  // if(result < 0) {
+  //   return -1;
+  // }
 
-  // cprintf("got writebytes\n");
-  int writeRes = filewrite(fd, buf, n);
-  // cprintf("got the results %d\n", writeRes);
-  return writeRes;
+  // result = argstr(1, &buf);
+  // if(result < 0) {
+  //   return -1;
+  // }
+
+  // result = argint(2, &n);
+  // if(result < 0 || n < 0) {
+  //   return -1;
+  // }
+
+  // // cprintf("got writebytes\n");
+  // int writeRes = filewrite(fd, buf, n);
+  // // cprintf("got the results %d\n", writeRes);
+  // return writeRes;
 }
 
 int sys_close(void) {

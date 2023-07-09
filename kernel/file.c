@@ -105,12 +105,10 @@ int filewrite(int fd, char *buffer, int writebytes) {
 
   struct file_info file = *(currProc->filetable[fd]);
   if (file.node == NULL) {
-    cprintf("node\n");
     return -1;
   }
 
   if (file.flags == O_RDONLY) {
-    cprintf("flags\n");
     return -1;
   }
 
@@ -118,10 +116,10 @@ int filewrite(int fd, char *buffer, int writebytes) {
   int bytesWritten =
       concurrent_writei(file.node, buffer, file.currOffset, writebytes);
   // update the current position
-  if (bytesWritten != -1) {
+  if (bytesWritten > 0) {
     file.currOffset = file.currOffset + bytesWritten;
   }
-  cprintf("done %d\n", bytesWritten);
+
   return bytesWritten;
 }
 
