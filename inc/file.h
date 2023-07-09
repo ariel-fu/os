@@ -33,7 +33,7 @@ enum {
 
 // structure representing a logical file
 struct file_info {
-  uint memRefCount; // in memory reference count
+  uint ref; // in memory reference count
   struct inode * node; // a reference to the inode
   int currOffset;  // current offset
   int flags; // access permissions
