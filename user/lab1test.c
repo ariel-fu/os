@@ -233,12 +233,13 @@ void duptest(void) {
   if (strcmp(buf, "aaaaaaaaaa") != 0)
     error("couldn't read from original fd after dup");
 
-  if (read(fd2, buf, 10) != 10)
+  char* buf2;
+  if (read(fd2, buf2, 10) != 10)
     error("coudn't read from the dupped fd");
-  buf[10] = 0;
+  buf2[10] = 0;
 
-  if (strcmp(buf, "aaaaaaaaaa") == 0)
-    error("the duped fd didn't respect the read offset from the other file. %s", buf);
+  if (strcmp(buf2, "aaaaaaaaaa") == 0)
+    error("the duped fd didn't respect the read offset from the other file. %s", buf2);
 
   if (strcmp(buf, "bbbbbbbbbb") != 0)
     error(
