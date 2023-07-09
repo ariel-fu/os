@@ -82,7 +82,7 @@ int sys_open(void) {
   }
 
   result = argstr(0, &filepath);
-  if(result == -1) {
+  if(result < 0) {
     // invalid filepath
     return -1;
   }
