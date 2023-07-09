@@ -114,7 +114,8 @@ int sys_open(void) {
     return -1;
   }
 
-  if(mode != O_RDONLY) {
+   if (mode != O_RDONLY && mode != O_WRONLY && mode != O_RDWR && mode != O_CREATE && 
+      (mode != (O_CREATE | O_RDWR))) {
     return -1;
   }
 
