@@ -95,13 +95,13 @@ int filewrite(int fd, char *buffer, int writebytes) {
     return -1;
   }
 
-  // if (file.flags == O_RDONLY) {
-  //   return -1;
-  // }
+  if (file.flags == O_RDONLY) {
+    return -1;
+  }
 
   // write bytes_to_write from the buffer into the fd
   int bytesWritten =
-      concurrent_writei(file.node, buffer, file.currOffset, writebytes);
+      writei(file.node, buffer, file.currOffset, writebytes);
   // update the current position
   if (bytesWritten > 0) {
     currProc->filetable[fd]->currOffset += bytesWritten;
