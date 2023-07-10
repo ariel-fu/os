@@ -100,7 +100,7 @@ int filewrite(int fd, char *buffer, int writebytes) {
 
   // write bytes_to_write from the buffer into the fd
   int bytesWritten =
-      concurrent_writei(file.node, buffer, file.currOffset, writebytes);
+      writei(file.node, buffer, file.currOffset, writebytes);
   // update the current position
   if (bytesWritten > 0) {
     currProc->filetable[fd]->currOffset += bytesWritten;
@@ -200,7 +200,7 @@ int filestat(int fd, struct stat *fstat) {
   if (currProc->filetable[fd] == NULL) {
     // invalid FD
     return -1;
-  }
+}
 
   struct file_info file = *(currProc->filetable[fd]);
   if (file.node == NULL) {
