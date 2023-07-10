@@ -19,28 +19,22 @@ struct file_info gfiledescriptors[NFILE];
 int smallestFd;
 
 int fileopen(char *filepath, int mode) {
-  cprintf("MODE: %d\n", mode);
   struct inode *newiNode = namei(filepath);
   if (newiNode == NULL) {
     return -1;
   }
 
-  cprintf("lock \n");
   // locki(newiNode);
 
   if (newiNode->type == T_DIR) {
-    cprintf("dir\n");
-
     unlocki(newiNode);
     return -1;
   }
 
   struct stat st;
   concurrent_stati(newiNode, &st);
-  cprintf("stati\n");
 
   struct proc *currProc = myproc();
-  cprintf("proc\n");
 
   if (currProc == NULL) {
     return -1;
@@ -48,7 +42,6 @@ int fileopen(char *filepath, int mode) {
 
   int type = newiNode->type;
   if (type == T_FILE && mode != O_RDONLY) {
-    cprintf("a non-console file & non-read mode");
     return -1;
   }
 
@@ -61,21 +54,14 @@ int fileopen(char *filepath, int mode) {
       break;
     }
   }
-  cprintf("process slot\n");
-
   if (availableSlot == 0) {
     // no more valid places for a new file
-  cprintf("not available slot\n");
 
     return -1;
   }
 
-  cprintf("global slot\n");
-
-
   // place into global file descriptor
   for (int globalFD = 0; globalFD < NFILE; globalFD++) {
-    cprintf("at: %d with file %d\n", globalFD, gfiledescriptors[globalFD].ref);
     if (gfiledescriptors[globalFD].ref == 0 ) {
       struct file_info file;
       file.ref = 1;
@@ -124,6 +110,7 @@ int filewrite(int fd, char *buffer, int writebytes) {
 }
 
 int fileread(int fd, char *buffer, int readbytes) {
+  cprintf("in read");
   struct proc *currProc = myproc();
   if (currProc == NULL) {
     return -1;
@@ -139,16 +126,15 @@ int fileread(int fd, char *buffer, int readbytes) {
   }
 
   int numRead = concurrent_readi(file.node, buffer, file.currOffset, readbytes);
-  cprintf("read: %d\n", numRead);
   if (numRead > 0) {
     (currProc->filetable[fd])->currOffset += numRead;
   }
 
-  cprintf("updated offset to: %d\n", (currProc->filetable[fd])->currOffset);
   return numRead;
 }
 
 int fileclose(int fd) {
+  cprintf("in close");
   struct proc *currProc = myproc();
   if (currProc == NULL) {
     return -1;
@@ -180,6 +166,7 @@ int fileclose(int fd) {
 }
 
 int filedup(int fd) {
+  cprintf("in dup");
   struct proc *currProc = myproc();
   if (currProc == NULL) {
     return -1;
@@ -208,6 +195,7 @@ int filedup(int fd) {
 }
 
 int filestat(int fd, struct stat *fstat) {
+  cprintf("in stat");
   struct proc *currProc = myproc();
   if (currProc->filetable[fd] == NULL) {
     // invalid FD
