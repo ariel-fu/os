@@ -195,12 +195,14 @@ int filedup(int fd) {
 }
 
 int filestat(int fd, struct stat *fstat) {
-  cprintf("in stat\n");
+  
   struct proc *currProc = myproc();
   if (currProc->filetable[fd] == NULL) {
     // invalid FD
     return -1;
-}
+  }
+
+  cprintf("in stat %d\n", currProc->filetable[fd]->node->type);
   // get the stats
   concurrent_stati(currProc->filetable[fd]->node, fstat);
   // return success
