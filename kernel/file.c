@@ -159,7 +159,7 @@ int fileclose(int fd) {
     file.node = 0;
   } else {
     // multipl;e instances - remove one from the references
-    file.ref--;
+    currProc->filetable[fd]->ref--;
   }
 
   currProc->filetable[fd] = NULL;

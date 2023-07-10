@@ -95,6 +95,8 @@ int sys_write(void) {
     return -1;
   }
 
+  cprintf("buffer: &s\n", buf);
+
   // cprintf("got writebytes\n");
   int writeRes = filewrite(fd, buf, n);
   // cprintf("got the results %d\n", writeRes);
