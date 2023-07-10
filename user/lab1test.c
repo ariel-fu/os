@@ -118,30 +118,30 @@ void testinvalidargs(void) {
   printf(stdout, "passed argument checking for read\n");
 
   // write
-  // printf(stdout, "_____________WRITE_____________");
-  // if (write(15, buf, 11) != -1)
-  //   error("write on a non existent file descriptor");
+  printf(stdout, "_____________WRITE_____________");
+  if (write(15, buf, 11) != -1)
+    error("write on a non existent file descriptor");
 
-  // if (write(fd, buf, 11) != -1)
-  //   error("able to write to a file in read only fs");
+  if (write(fd, buf, 11) != -1)
+    error("able to write to a file in read only fs");
 
-  // printf(stdout, "passed argument checking for write\n");
+  printf(stdout, "passed argument checking for write\n");
 
-  // // stat
-  // if (fstat(15, &st) != -1)
-  //   error("tried to fstat on a non existent file descriptor");
+  // stat
+  if (fstat(15, &st) != -1)
+    error("tried to fstat on a non existent file descriptor");
 
-  // if (fstat(stdout, &st) != 0) error("couldn't fstat on stdout");
+  if (fstat(stdout, &st) != 0) error("couldn't fstat on stdout");
 
-  // assert(st.type == T_DEV);
-  // assert(st.size == 0);
+  assert(st.type == T_DEV);
+  assert(st.size == 0);
 
-  // if (stat("/small.txt", &st) != 0) error("couldn't stat on '/small.txt'");
+  if (stat("/small.txt", &st) != 0) error("couldn't stat on '/small.txt'");
 
-  // assert(st.type == T_FILE);
-  // assert(st.size == 26);
+  assert(st.type == T_FILE);
+  assert(st.size == 26);
 
-  // printf(stdout, "passed argument checking for fstat\n");
+  printf(stdout, "passed argument checking for fstat\n");
 
   // dup
   if (dup(15) != -1)

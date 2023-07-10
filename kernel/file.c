@@ -80,10 +80,6 @@ int fileopen(char *filepath, int mode) {
 }
 
 int filewrite(int fd, char *buffer, int writebytes) {
-  if(buffer[0] == 0) {
-    cprintf("in write empty? %s,  %d\n", buffer[0], writebytes);
-
-  }
   struct proc *currProc = myproc();
   if (currProc == NULL) {
     return -1;
@@ -98,7 +94,7 @@ int filewrite(int fd, char *buffer, int writebytes) {
     return -1;
   }
 
-  if (file.flags == O_RDONLY) {
+  if (file.node->type == T_FILE && file.flags == O_RDONLY) {
     return -1;
   }
 
