@@ -209,7 +209,7 @@ int filestat(int fd, struct stat *fstat) {
   }
 
   // get the stats
-  concurrent_stati(file.node, fstat);
+  stati(file.node, fstat);
   // return success
   return 0;
 }
