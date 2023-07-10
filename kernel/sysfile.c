@@ -126,7 +126,7 @@ int sys_fstat(void) {
   int fd;
   struct stat *fstat;
 
-  if (argint(0, fd) < 0) {
+  if (argint(0, &fd) < 0) {
     return -1;
   }
 
