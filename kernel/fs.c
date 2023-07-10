@@ -298,6 +298,7 @@ void stati(struct inode *ip, struct stat *st) {
   if (!holdingsleep(&ip->lock))
     panic("not holding lock");
 
+  cprintf("TYPE: " + ip->type);
   st->dev = ip->dev;
   st->ino = ip->inum;
   st->type = ip->type;

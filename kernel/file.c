@@ -201,15 +201,8 @@ int filestat(int fd, struct stat *fstat) {
     // invalid FD
     return -1;
 }
-
-  struct file_info file = *(currProc->filetable[fd]);
-  if (file.node == NULL) {
-    // invalid file
-    return -1;
-  }
-
   // get the stats
-  stati(file.node, fstat);
+  concurrent_stati(currProc->filetable[fd]->node, fstat);
   // return success
   return 0;
 }
