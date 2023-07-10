@@ -80,7 +80,7 @@ int fileopen(char *filepath, int mode) {
 }
 
 int filewrite(int fd, char *buffer, int writebytes) {
-  cprintf("in write");
+  cprintf("in write\n");
   struct proc *currProc = myproc();
   if (currProc == NULL) {
     return -1;
