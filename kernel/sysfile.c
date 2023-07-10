@@ -89,11 +89,17 @@ int sys_write(void) {
   if(result < 0) {
     return -1;
   }
-
+  
   result = argint(2, &n);
   if(result < 0 || n < 0) {
     return -1;
   }
+
+  result = argptr(1, &buf, n);
+  if(result < 0) {
+    return -1;
+  }
+
 
   cprintf("buffer: %s, n = %d\n", buf, n);
 

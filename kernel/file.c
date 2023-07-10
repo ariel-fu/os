@@ -80,6 +80,8 @@ int fileopen(char *filepath, int mode) {
 }
 
 int filewrite(int fd, char *buffer, int writebytes) {
+      cprintf("in write %s, %d\n", buffer[0], writebytes);
+
   if(buffer[0] == '\n') {
     cprintf("in write %s, %d\n", buffer[0], writebytes);
 
