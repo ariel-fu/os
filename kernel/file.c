@@ -110,7 +110,7 @@ int filewrite(int fd, char *buffer, int writebytes) {
 }
 
 int fileread(int fd, char *buffer, int readbytes) {
-  cprintf("in read");
+  cprintf("in read\n");
   struct proc *currProc = myproc();
   if (currProc == NULL) {
     return -1;
@@ -134,7 +134,7 @@ int fileread(int fd, char *buffer, int readbytes) {
 }
 
 int fileclose(int fd) {
-  cprintf("in close");
+  cprintf("in close\n");
   struct proc *currProc = myproc();
   if (currProc == NULL) {
     return -1;
@@ -166,7 +166,7 @@ int fileclose(int fd) {
 }
 
 int filedup(int fd) {
-  cprintf("in dup");
+  cprintf("in dup\n");
   struct proc *currProc = myproc();
   if (currProc == NULL) {
     return -1;
@@ -195,7 +195,7 @@ int filedup(int fd) {
 }
 
 int filestat(int fd, struct stat *fstat) {
-  cprintf("in stat");
+  cprintf("in stat\n");
   struct proc *currProc = myproc();
   if (currProc->filetable[fd] == NULL) {
     // invalid FD
