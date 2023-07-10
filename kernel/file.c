@@ -101,7 +101,7 @@ int filewrite(int fd, char *buffer, int writebytes) {
 
   // write bytes_to_write from the buffer into the fd
   int bytesWritten =
-      writei(file.node, buffer, file.currOffset, writebytes);
+      concurrent_writei(file.node, buffer, file.currOffset, writebytes);
   // update the current position
   if (bytesWritten > 0) {
     currProc->filetable[fd]->currOffset += bytesWritten;
