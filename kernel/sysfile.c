@@ -100,10 +100,7 @@ int sys_write(void) {
     return -1;
   }
 
-
-  // cprintf("got writebytes\n");
   int writeRes = filewrite(fd, buf, n);
-  // cprintf("got the results %d\n", writeRes);
   return writeRes;
 }
 
@@ -155,14 +152,12 @@ int sys_open(void) {
 
   result = argstr(0, &filepath);
   if (result < 0) {
-    cprintf("here1");
     // invalid filepath
     return -1;
   }
 
   result = argptr(0, &filepath, strlen(filepath));
   if (result < 0) {
-    cprintf("here2");
     // invalid filepath
     return -1;
   }

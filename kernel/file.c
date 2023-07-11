@@ -19,14 +19,10 @@ struct file_info gfiledescriptors[NFILE];
 int smallestFd;
 
 int fileopen(char *filepath, int mode) {
-  cprintf("filepath: %s\n", filepath);
   struct inode *newiNode = namei(filepath);
   if (newiNode == NULL) {
     return -1;
   }
-
-  // locki(newiNode);
-
 
   struct stat st;
   concurrent_stati(newiNode, &st);
@@ -39,12 +35,8 @@ int fileopen(char *filepath, int mode) {
 
   int type = newiNode->type;
 
-  if (type == T_DIR) {
+  if (type == T_DIR || (type == T_FILE && mode != O_RDONLY)) {
     unlocki(newiNode);
-    return -1;
-  }
-
-  if (type == T_FILE && mode != O_RDONLY) {
     return -1;
   }
 
@@ -59,7 +51,6 @@ int fileopen(char *filepath, int mode) {
   }
   if (availableSlot == 0) {
     // no more valid places for a new file
-
     return -1;
   }
 
@@ -113,7 +104,6 @@ int filewrite(int fd, char *buffer, int writebytes) {
 }
 
 int fileread(int fd, char *buffer, int readbytes) {
-  cprintf("in read\n");
   struct proc *currProc = myproc();
   if (currProc == NULL) {
     return -1;
@@ -137,7 +127,6 @@ int fileread(int fd, char *buffer, int readbytes) {
 }
 
 int fileclose(int fd) {
-  cprintf("in close\n");
   struct proc *currProc = myproc();
   if (currProc == NULL) {
     return -1;
@@ -160,7 +149,7 @@ int fileclose(int fd) {
     file.ref = 0;
     file.node = 0;
   } else {
-    // multipl;e instances - remove one from the references
+    // multiple instances - remove one from the references
     currProc->filetable[fd]->ref--;
   }
 
@@ -169,7 +158,6 @@ int fileclose(int fd) {
 }
 
 int filedup(int fd) {
-  cprintf("in dup\n");
   struct proc *currProc = myproc();
   if (currProc == NULL) {
     return -1;
@@ -206,8 +194,6 @@ int filestat(int fd, struct stat *fstat) {
   }
 
   struct file_info *file = currProc->filetable[fd];
-
-  cprintf("in stat %d\n", currProc->filetable[fd]->node->type);
   // get the stats
   concurrent_stati(file->node, fstat);
   // return success
