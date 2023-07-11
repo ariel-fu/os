@@ -74,7 +74,7 @@ void testopen(void) {
   if (fd == -1)
     error("cannot open small.txt");
   struct stat st;
-  fd = open("stdout", O_RDWR);
+  fd = open("console", O_RDWR);
   if(fd == -1) {
     error("stdout\n");
   }
