@@ -27,10 +27,6 @@ int fileopen(char *filepath, int mode) {
 
   // locki(newiNode);
 
-  if (newiNode->type == T_DIR) {
-    unlocki(newiNode);
-    return -1;
-  }
 
   struct stat st;
   concurrent_stati(newiNode, &st);
@@ -43,6 +39,14 @@ int fileopen(char *filepath, int mode) {
 
   int type = newiNode->type;
   cprintf("OPEN TYPE: %d\n", type);
+
+  
+  if (type == T_DIR) {
+    unlocki(newiNode);
+    cprintf("is dir?\n");
+    return -1;
+  }
+
   if (type == T_FILE && mode != O_RDONLY) {
     cprintf("failed here\n");
     return -1;
