@@ -38,17 +38,13 @@ int fileopen(char *filepath, int mode) {
   }
 
   int type = newiNode->type;
-  cprintf("OPEN TYPE: %d\n", type);
-
 
   if (type == T_DIR) {
     unlocki(newiNode);
-    cprintf("is dir?\n");
     return -1;
   }
 
   if (type == T_FILE && mode != O_RDONLY) {
-    cprintf("failed here\n");
     return -1;
   }
 
@@ -105,7 +101,6 @@ int filewrite(int fd, char *buffer, int writebytes) {
     return -1;
   }
 
-cprintf("made it here");
   // write bytes_to_write from the buffer into the fd
   int bytesWritten =
       concurrent_writei(file.node, buffer, file.currOffset, writebytes);
@@ -114,7 +109,6 @@ cprintf("made it here");
     currProc->filetable[fd]->currOffset += bytesWritten;
   }
 
-cprintf("done");
   return bytesWritten;
 }
 
