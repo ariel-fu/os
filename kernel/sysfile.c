@@ -146,7 +146,7 @@ int sys_open(void) {
   char *filepath;
   int mode;
   int result = argint(1, &mode);
-  if (result < 0 || mode < 0 || mode > NOFILE) {
+  if (result < 0) {
     // invalid FD
     return -1;
   }
@@ -157,12 +157,14 @@ int sys_open(void) {
 
   result = argstr(0, &filepath);
   if (result < 0) {
+    cprintf("here1");
     // invalid filepath
     return -1;
   }
 
   result = argptr(0, &filepath, strlen(filepath));
   if (result < 0) {
+    cprintf("here2");
     // invalid filepath
     return -1;
   }
