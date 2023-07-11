@@ -24,6 +24,9 @@ int fileopen(char *filepath, int mode) {
     return -1;
   }
 
+  // locki(newiNode);
+
+
   struct stat st;
   concurrent_stati(newiNode, &st);
 
@@ -35,8 +38,12 @@ int fileopen(char *filepath, int mode) {
 
   int type = newiNode->type;
 
-  if (type == T_DIR || (type == T_FILE && mode != O_RDONLY)) {
+  if (type == T_DIR ) {
     unlocki(newiNode);
+    return -1;
+  }
+
+  if (type == T_FILE && mode != O_RDONLY) {
     return -1;
   }
 
@@ -51,6 +58,7 @@ int fileopen(char *filepath, int mode) {
   }
   if (availableSlot == 0) {
     // no more valid places for a new file
+
     return -1;
   }
 
