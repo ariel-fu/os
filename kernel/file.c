@@ -19,6 +19,7 @@ struct file_info gfiledescriptors[NFILE];
 int smallestFd;
 
 int fileopen(char *filepath, int mode) {
+  cprintf("filepath: %s\n", filepath);
   struct inode *newiNode = namei(filepath);
   if (newiNode == NULL) {
     return -1;
