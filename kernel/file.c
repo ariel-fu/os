@@ -42,6 +42,7 @@ int fileopen(char *filepath, int mode) {
 
   int type = newiNode->type;
   if (type == T_FILE && mode != O_RDONLY) {
+    cprintf("failed here\n");
     return -1;
   }
 
