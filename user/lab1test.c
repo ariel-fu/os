@@ -73,7 +73,13 @@ void testopen(void) {
   fd = open("/small.txt", O_RDONLY);
   if (fd == -1)
     error("cannot open small.txt");
-
+  struct stat st;
+  fd = open(stdout, O_RDWR);
+  if(fd == -1) {
+    error("stdout\n");
+  }
+  fstat(fd, &st);
+  cprintf("type of stdout: %d\n", st.type);
   printf(stdout, "passed argument checking for open\n");
 
   // ensure opening the same file results with a

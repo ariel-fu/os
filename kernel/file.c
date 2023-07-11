@@ -202,9 +202,11 @@ int filestat(int fd, struct stat *fstat) {
     return -1;
   }
 
+  struct file_info *file = currProc->filetable[fd];
+
   cprintf("in stat %d\n", currProc->filetable[fd]->node->type);
   // get the stats
-  concurrent_stati(currProc->filetable[fd]->node, fstat);
+  concurrent_stati(file->node, fstat);
   // return success
   return 0;
 }

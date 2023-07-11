@@ -134,7 +134,7 @@ int sys_fstat(void) {
     return -1;
   }
 
-  if (argptr(1, (char **)&fstat, sizeof(fstat)) < 0) {
+  if (argptr(1, (char **)&fstat, sizeof(struct stat)) < 0) {
     return -1;
   }
 
