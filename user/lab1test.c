@@ -79,7 +79,7 @@ void testopen(void) {
     error("stdout\n");
   }
   fstat(fd, &st);
-  cprintf("type of stdout: %d\n", st.type);
+  printf(stdout, "type of stdout: %d\n", st.type);
   printf(stdout, "passed argument checking for open\n");
 
   // ensure opening the same file results with a
