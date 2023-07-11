@@ -40,7 +40,7 @@ int fileopen(char *filepath, int mode) {
   int type = newiNode->type;
   cprintf("OPEN TYPE: %d\n", type);
 
-  
+
   if (type == T_DIR) {
     unlocki(newiNode);
     cprintf("is dir?\n");
@@ -101,7 +101,7 @@ int filewrite(int fd, char *buffer, int writebytes) {
     return -1;
   }
 
-  if (file.node->type == T_FILE && file.flags == O_RDONLY) {
+  if (file.node->type == T_FILE || file.flags == O_RDONLY) {
     return -1;
   }
 
